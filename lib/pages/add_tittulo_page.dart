@@ -1,16 +1,16 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:provider/provider.dart';
 import '../models/time.dart';
 import '../models/titulos.dart';
 import 'package:aula01_tabela_de_pontos/repositories/times_repository.dart';
 
 class AddTituloPage extends StatefulWidget {
   Time time;
-  ValueChanged<Titulo> onSave;
 
-  AddTituloPage({Key? key, required this.time, required this.onSave})
-      : super(key: key);
+  AddTituloPage({Key? key, required this.time}) : super(key: key);
 
   @override
   State<AddTituloPage> createState() => _AddTituloPageState();
@@ -20,6 +20,26 @@ class _AddTituloPageState extends State<AddTituloPage> {
   final _campeonato = TextEditingController();
   final _ano = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+
+  save() {
+    Provider.of<TimesRepository>(context, listen: false).addTitulo(
+      time: widget.time,
+      titulo: Titulo(
+        ano: _ano.text,
+        campeonato: _campeonato.text,
+      ),
+    );
+
+    Get.back();
+
+    Get.snackbar(
+      'Sucesso',
+      'Titulo cadastrado',
+      backgroundColor: widget.time.cor,
+      colorText: Colors.white,
+      snackPosition: SnackPosition.BOTTOM,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -77,9 +97,7 @@ class _AddTituloPageState extends State<AddTituloPage> {
                   ),
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
-                      widget.onSave(
-                        Titulo(ano: _ano.text, campeonato: _campeonato.text),
-                      );
+                      save();
                     }
                   },
                   child: Row(
@@ -90,6 +108,9 @@ class _AddTituloPageState extends State<AddTituloPage> {
                         padding: EdgeInsets.all(24),
                         child: Text(
                           'Salvar',
+                          style: TextStyle(
+                            fontSize: 20,
+                          ),
                         ),
                       ),
                     ],
