@@ -37,6 +37,16 @@ class _EditTituloPageState extends State<EditTituloPage> {
       campeonato: _campeonato.text,
       ano: _ano.text,
     );
+
+     Get.back();
+
+    Get.snackbar(
+      'Sucesso',
+      'Titulo cadastrado',
+      
+      colorText: Colors.black,
+      snackPosition: SnackPosition.BOTTOM,
+    );
   }
 
   @override
