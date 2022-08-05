@@ -42,9 +42,9 @@ class _EditTituloPageState extends State<EditTituloPage> {
 
     Get.snackbar(
       'Sucesso',
-      'Titulo cadastrado',
+      'Titulo Editado',
       
-      colorText: Colors.black,
+      colorText: Colors.white,
       snackPosition: SnackPosition.BOTTOM,
     );
   }

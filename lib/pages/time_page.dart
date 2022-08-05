@@ -87,7 +87,7 @@ class _TimePageState extends State<TimePage> {
         .times
         .firstWhere((t) => t.nome == widget.time.nome);
 
-    final quantidade = time.titulos.length;
+    final quantidade = time.titulos!.length;
 
     return quantidade == 0
         ? Container(
@@ -108,12 +108,12 @@ class _TimePageState extends State<TimePage> {
             ) {
               return ListTile(
                 leading: Icon(Icons.emoji_events),
-                title: Text(time.titulos[index].campeonato),
-                trailing: Text(time.titulos[index].ano),
+                title: Text(time.titulos![index].campeonato),
+                trailing: Text(time.titulos![index].ano),
                 onTap: () {
                   Get.to(
                     EditTituloPage(
-                      titulo: time.titulos[index],
+                      titulo: time.titulos![index],
                     ),
                     fullscreenDialog: true,
                   );
